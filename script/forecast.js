@@ -22,7 +22,7 @@ const apiKey = 'Bf7UyIUpZNqofMDQLv4xAJ6sODOUGYXQ';
 
 //get city information using the api key. here its a query
 const getCity = async (city) => {
-    const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
+    const base = 'https://dataservice.accuweather.com/locations/v1/cities/search';
     const query = `?apikey=${apiKey}&q=${city}`; //you forget the amplesand and the url wont work. The query is for the api key and search text
     
     const response = await fetch(base + query);
@@ -47,7 +47,7 @@ getCity('lagos')   //even though await has helped us avoid series of thens, what
 // Now we'll get the weather condition using the city data's key(an id).here its a parameter
 
 const getWeather = async (cityId) => {
-    const base = 'http://dataservice.accuweather.com/currentconditions/v1/' + cityId;
+    const base = 'https://dataservice.accuweather.com/currentconditions/v1/' + cityId;
     const query = `?apikey=${apiKey}`; // the query is for the initial same api key
 
     const response = await fetch(base + query);

@@ -17,9 +17,13 @@
             <form class="change-location">
                 <div class="input-group">
                     <label for="city">Enter a location for weather information</label>
-                    <input type="text" id="city" name="city"/> <!--for and id is the pair that deals with assessibility while name is for handling backend data-->
+                    <input type="text" id="city" name="city"/> <!--for and id is the pair that deals with assessibility while name and value (not used here) is for handling backend data. See it like a key-value object pair-->
                 </div>
             </form>
+
+            <div>
+                <p class="loading-div">loading...</p>
+            </div>
 
             <div class="card" style="display:none">
                 <img src="https://placehold.co/400x300" class="time-img">

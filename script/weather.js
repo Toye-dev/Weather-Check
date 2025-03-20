@@ -3,6 +3,7 @@ const card = document.querySelector('.card');
 const details = document.querySelector('.details');
 const timeImg = document.querySelector('img.time-img');
 const icon = document.querySelector('.icon img');
+const load = document.querySelector('.loading-div');
 
 
 const updateUI = (data) => {
@@ -28,6 +29,8 @@ const updateUI = (data) => {
     const iconSrc = `icons/${weatherData.WeatherIcon}.svg`
     icon.setAttribute('src', iconSrc);
 
+    //let timeSrc = weatherData.IsDayTime ?  'day.svg' : 'night.svg';//ternary operators
+    
     let timeSrc = null;
     if (weatherData.IsDayTime){
         timeSrc = 'day.svg'
@@ -57,12 +60,30 @@ const updateCity = async (citySearch) => {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const citySearch = form.city.value.trim();
-    
+
+    load.style.display = 'block';  
+
     // the updateCity call taking in the city search fires on submit. The function defined above it receives the search and executes  it
     updateCity(citySearch)
         .then(data => updateUI(data))// the updatecity is the call of a promise and the data passed in as parameter is the resolved value received 
-        .catch(err => console.log(err));
+        .catch(err => console.log(err))
+        .finally(() => {
+            load.style.display = "none";
+        })
 
     form.reset();
+
+    // storing search input in local storage
+    localStorage.setItem('location', citySearch); // the first parameter is any name you give it, and the second is the value 
+
+
 })
+
+if(localStorage.getItem('location')){
+    const location = localStorage.getItem('location')
+    
+    updateCity(location)
+    .then(data => updateUI(data))
+    .catch(err => console.log(err));
+}
 
